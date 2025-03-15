@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Specifies the xml schema, also make sure that our xml adheres to correct structure and version define by maven-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+<!-- Use to define the parent project. Current project inherit the configuration from specified Parent project Super Pom-->
+<!--If the parent field is not specified then maven by default inherit the configuartion from super pom-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -27,8 +30,11 @@
 		<url/>
 	</scm>
 	<properties>
+<!--Defines the key value pair for configuartion. Can be referenced throughout the POM file.-->
+<!--To use it <version>${java.version}</version>-->
 		<java.version>21</java.version>
 	</properties>
+<!--Dependency-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,3 +58,29 @@
 	</build>
 
 </project>
+<!--
+If you want to run package phase, all it's previous phase must get executed.
+Here are the phases.
+  -> Validate(Project structure):-
+  	Maven already has 'validate' phase defined and its goal, but if we want to add more goals or tasks then we can use
+  	<build> element. And add the goal to specific phase.
+  -> Compile(Source Code)
+  	Command:- mvn compile
+  -> Test the code(Unit test)
+  	Command:- mvn test
+  -> Packaged compiled code(Jar or war)
+  	Command:- mvn package
+  	First complete Validate, test phase and then run package phase in which it 'generate' .jar or .war file.
+  -> Verify the integrity of package
+	Command:- mvn verify
+	It can verify some additional check apart from unit test case like:-
+		1. Find unused variable
+		2. Find unused imports
+		3. Empty catch blocks
+		4. No usage of objects
+		5. Find duplicate code etc.
+  -> Install the package in local repository
+  	Command:- mvn install
+  -> Deploy the package in remote repository
+  	Command:- mvn deploy
+-->
