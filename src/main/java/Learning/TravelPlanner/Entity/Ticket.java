@@ -15,15 +15,17 @@ public class Ticket {
     private LocalDateTime createTime;
     private Date journeyDate;
     private Time journeyTime;
+    private String passengerName;
     private String From;
     private String Destination;
 
     public Ticket() {}
-    public Ticket(long id, LocalDateTime createTime, Date journeyDate, Time journeyTime, String From, String Destination){
+    public Ticket(long id, LocalDateTime createTime, Date journeyDate, Time journeyTime, String passengerName, String From, String Destination){
         this.id = id;
         this.createTime = createTime;
         this.journeyDate = journeyDate;
         this.journeyTime = journeyTime;
+        this.passengerName = passengerName;
         this.From = From;
         this.Destination = Destination;
     }
@@ -37,39 +39,27 @@ public class Ticket {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime){
-        this.createTime = createTime;
-    }
-
     public Date getJourneyDate() {
         return journeyDate;
     }
 
-    public void setJourneyDate(Date journeyDate){
-        this.journeyDate = journeyDate;
+    public String getPassengerName(){
+        return passengerName;
+    }
+
+    public void setPassengerName(String name){
+        this.passengerName = name;
     }
 
     public Time getJourneyTime() {
         return journeyTime;
     }
 
-    public void setJourneyTime(Time journeyTime){
-        this.journeyTime = journeyTime;
-    }
-
     public String getFrom() {
         return From;
     }
 
-    public void setFrom(String from){
-        this.From = from;
-    }
-
     public String getDestination() {
         return Destination;
-    }
-
-    public void setDestination(String destination){
-        this.Destination = destination;
     }
 }

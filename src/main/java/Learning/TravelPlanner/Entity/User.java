@@ -59,7 +59,4 @@ public class User {
     public Date getDateOfBirth(){
         return dateOfBirth;
     }
-    public void setDateOfBirth(Date dateOfBirth){
-        this.dateOfBirth = dateOfBirth;
-    }
 }
