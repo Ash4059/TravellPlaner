@@ -2,6 +2,8 @@ package Learning.TravelPlanner.Entity;
 
 import java.util.Date;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +21,22 @@ public class User {
     private String password;
     private Date dateOfBirth;
 
-    public User(){}
     public User(String firstName, String lastName, String email, String password, Date dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    @PostConstruct
+    public void initialize(){
+        System.out.println("Bean has been constructed and dependency have been injected.");
+    }
+
+    @PreDestroy
+    public void preDestroy(){
+        System.out.println("Bean is about to destroy in predestroyed method");
     }
 
     // getters and setters
