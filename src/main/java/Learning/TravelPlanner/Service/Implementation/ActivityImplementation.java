@@ -14,8 +14,9 @@ import Learning.TravelPlanner.Service.ActivityService;
 public class ActivityImplementation implements ActivityService {
 
     List<Activity> activities;
-//    Spring create object using empty parameter contructor if present. If two constructor are present with
-//    different parameter then whatever bean is called we need to add @Autowired to the constructor
+//    -> Spring create object using empty parameter contructor if present. If two constructor are present with
+//    different parameter then whatever bean is called we need to add @Autowired to the constructor.
+//    -> If only one constructor is present then adding @Autowired to the constructor is not necessary
 //    User user;
 //    Ticket ticket;
 

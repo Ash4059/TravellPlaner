@@ -2,6 +2,8 @@ package Learning.TravelPlanner.Service.Implementation;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import Learning.TravelPlanner.Entity.Ticket;
@@ -12,8 +14,17 @@ public class TicketImplementation implements TicketService {
 
     List<Ticket> tickets;
 
+    // 1. To resolve cyclic dependencies we can use Lazy on field injection.
+    // @Autowired
+    // @Lazy
+    private UserImplementation userImplementation;
+
     public TicketImplementation() {
         this.tickets = new ArrayList<>();
+    }
+
+    public void setUserImplementation(UserImplementation userImplementation) {
+        this.userImplementation = userImplementation;
     }
 
     @Override
