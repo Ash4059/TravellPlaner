@@ -2,10 +2,14 @@ package Learning.TravelPlanner.Config;
 
 import java.util.Calendar;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import Learning.TravelPlanner.Entity.User;
+import Learning.TravelPlanner.Service.BookingService;
+import Learning.TravelPlanner.Service.Implementation.OfflineBookingImplementation;
+import Learning.TravelPlanner.Service.Implementation.OnlineBookingImplementation;
 
 @Configuration
 public class AppConfig {
@@ -15,6 +19,16 @@ public class AppConfig {
         Calendar calendar = Calendar.getInstance();
         calendar.set(1998, Calendar.AUGUST, 5);
         return new User("John", "Doe", "johndoe@gmail.com", "Password", Calendar.getInstance().getTime());
+    }
+
+    // @Value is used to inject value from various sources like property file environment variables or inline literals
+    // Or we can use @Value("false")
+    @Bean
+    public BookingService createBookingService(@Value("${isOnlineBooking}") boolean isOnlineBooking){
+        if(isOnlineBooking){
+            return new OnlineBookingImplementation();
+        }
+        return new OfflineBookingImplementation();
     }
 
     // How spring boot find these beans

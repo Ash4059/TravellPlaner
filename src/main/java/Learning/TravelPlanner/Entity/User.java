@@ -21,6 +21,8 @@ public class User {
     private String password;
     private Date dateOfBirth;
 
+    
+
     public User(String firstName, String lastName, String email, String password, Date dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;

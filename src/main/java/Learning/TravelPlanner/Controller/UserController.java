@@ -1,5 +1,6 @@
 package Learning.TravelPlanner.Controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -7,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Learning.TravelPlanner.Entity.User;
+import Learning.TravelPlanner.Service.BookingService;
 import Learning.TravelPlanner.Service.UserService;
 
 @RestController
@@ -17,7 +20,10 @@ import Learning.TravelPlanner.Service.UserService;
 public class UserController {
 
     private final UserService userService;
-    public UserController(UserService userService) {
+
+    private BookingService onlineBookingService;
+    private BookingService offlineBookingService;
+    public UserController(UserService userService, @Qualifier("onlineBooking") BookingService onlineBookingService, @Qualifier("offlineBooking") BookingService offlineBookingService) {
         this.userService = userService;
     }
 
@@ -35,6 +41,17 @@ public class UserController {
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found or invalid");
         }
+    }
+
+    // Industry standard methods
+    @PostMapping("/book")
+    public ResponseEntity<String> book(@RequestParam boolean isOnlineOrder){
+        if(isOnlineOrder){
+            onlineBookingService.createBooking();
+        } else {
+            offlineBookingService.createBooking();
+        }
+        return ResponseEntity.ok( "Booking successful");
     }
 
 }
