@@ -4,7 +4,9 @@ import java.util.*;
 
 import Learning.TravelPlanner.Entity.Ticket;
 import Learning.TravelPlanner.Entity.User;
+import Learning.TravelPlanner.Service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import Learning.TravelPlanner.Entity.Activity;
@@ -33,10 +35,18 @@ public class ActivityImplementation implements ActivityService {
 //        System.out.println("Ticket object is initialized");
 //    }
 
-    public ActivityImplementation(){
-        activities = new ArrayList<>();
-    }
+//    BookingService bookingService;
+//    public ActivityImplementation(BookingService bookingService){
+//        activities = new ArrayList<>();
+//        this.bookingService = bookingService;
+//    }
 
+//    @Qualifier("offlineBooking")
+//    BookingService bookingService;
+
+    public ActivityImplementation(){
+        this.activities = new ArrayList<>();
+    }
     // Implement methods here
     @Override
     public List<Activity> getAllActivity(){
